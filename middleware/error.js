@@ -32,9 +32,4 @@ export const ErrorMiddleWare = (err, req, res, next) => {
     success: false,
     message: err.message,
   });
-
-  // res.status(err.statusCode).render("404", {
-  //   success: false,
-  //   message: err.message,
-  // });
 };

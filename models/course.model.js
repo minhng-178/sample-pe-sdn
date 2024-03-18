@@ -5,6 +5,6 @@ const courseSchema = new mongoose.Schema({
   courseDescription: { type: String, require: true },
 });
 
-const courseModal = mongoose.model("Courses", courseSchema);
+const courseModel = mongoose.model("Courses", courseSchema);
 
-export default courseModal;
+export default courseModel;

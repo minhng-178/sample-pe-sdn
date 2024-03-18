@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import { CatchAsyncErrors } from "../middleware/catch-async-error.js";
-import courseModal from "../models/course.model.js";
-import sectionModal from "../models/section.model.js";
+import courseModel from "../models/course.model.js";
+import sectionModel from "../models/section.model.js";
 
 export const getSections = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const sections = await sectionModal.find({}).populate("course");
+    const sections = await sectionModel.find({}).populate("course");
 
     if (!sections) {
       req.flash("error", "No section found.");
@@ -20,11 +20,11 @@ export const getSections = CatchAsyncErrors(async (req, res, next) => {
 
 export const viewSectionById = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const section = await sectionModal
+    const section = await sectionModel
       .findById(req.params.id)
       .populate("course");
 
-    const courses = await courseModal.find({});
+    const courses = await courseModel.find({});
 
     if (!section) {
       req.flash("error", "No section found.");
@@ -42,11 +42,11 @@ export const viewSectionById = CatchAsyncErrors(async (req, res, next) => {
 
 export const getSectionById = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const section = await sectionModal
+    const section = await sectionModel
       .findById(req.params.id)
       .populate("course");
 
-    const courses = await courseModal.find({});
+    const courses = await courseModel.find({});
 
     if (!section) {
       req.flash("error", "No section found.");
@@ -64,7 +64,7 @@ export const getSectionById = CatchAsyncErrors(async (req, res, next) => {
 
 export const getSectionAddForm = async (req, res, next) => {
   try {
-    const courses = await courseModal.find({});
+    const courses = await courseModel.find({});
     if (!courses) {
       req.flash("error", "No course found.");
     }
@@ -81,12 +81,12 @@ export const createSection = CatchAsyncErrors(async (req, res, next) => {
     const { sectionName, sectionDescription, duration, isMainTask, courseId } =
       req.body;
 
-    const courses = await courseModal.find({});
+    const courses = await courseModel.find({});
     if (!courses) {
       req.flash("error", "No course found.");
     }
 
-    const course = await courseModal.findById(courseId);
+    const course = await courseModel.findById(courseId);
     if (!course) {
       req.flash("error", "No course found.");
       res.render("addSection", { courses: courses });
@@ -111,7 +111,7 @@ export const createSection = CatchAsyncErrors(async (req, res, next) => {
       return res.render("addSection", { courses: courses });
     }
 
-    const newData = await sectionModal.create({
+    const newData = await sectionModel.create({
       sectionName,
       sectionDescription,
       duration,
@@ -135,11 +135,11 @@ export const updateSection = CatchAsyncErrors(async (req, res, next) => {
     req.body;
 
   try {
-    const section = await sectionModal
+    const section = await sectionModel
       .findById(req.params.id)
       .populate("course");
 
-    const courses = await courseModal.find({});
+    const courses = await courseModel.find({});
 
     if (!section) {
       req.flash("error", "No section found.");
@@ -177,7 +177,7 @@ export const updateSection = CatchAsyncErrors(async (req, res, next) => {
       });
     }
 
-    const updatedSection = await sectionModal.findByIdAndUpdate(
+    const updatedSection = await sectionModel.findByIdAndUpdate(
       req.params.id,
       {
         sectionName,
@@ -205,7 +205,7 @@ export const updateSection = CatchAsyncErrors(async (req, res, next) => {
 
 export const deleteSection = CatchAsyncErrors(async (req, res, next) => {
   try {
-    await sectionModal.findByIdAndDelete(req.params.id);
+    await sectionModel.findByIdAndDelete(req.params.id);
     req.flash("success_msg", "Section deleted successful.");
     res.redirect("/dashboard");
   } catch (error) {

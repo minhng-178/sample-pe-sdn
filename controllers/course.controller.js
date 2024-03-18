@@ -1,10 +1,12 @@
 import { CatchAsyncErrors } from "../middleware/catch-async-error.js";
 
-import courseModal from "../models/course.model.js";
+import courseModel from "../models/course.model.js";
+import sectionModel from "../models/section.model.js";
+
 import ErrorHandler from "../utils/error-handler.js";
 export const getCourses = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const courses = await courseModal.find({});
+    const courses = await courseModel.find({});
 
     if (!courses) {
       return next(new ErrorHandler("Courses not found", 404));
@@ -20,7 +22,7 @@ export const getCourses = CatchAsyncErrors(async (req, res, next) => {
 });
 export const getCourseByID = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const course = await courseModal.findById(req.params.id);
+    const course = await courseModel.findById(req.params.id);
 
     if (!course) {
       return next(new ErrorHandler("Course not found", 404));
@@ -39,7 +41,7 @@ export const createCourse = CatchAsyncErrors(async (req, res, next) => {
   try {
     const { courseName, courseDescription } = req.body;
 
-    const newCourse = await courseModal.create({
+    const newCourse = await courseModel.create({
       courseName,
       courseDescription,
     });
@@ -61,7 +63,7 @@ export const updateCourses = CatchAsyncErrors(async (req, res, next) => {
   try {
     const { courseName, courseDescription } = req.body;
 
-    const course = await courseModal.findByIdAndUpdate(
+    const course = await courseModel.findByIdAndUpdate(
       req.params.id,
       {
         courseName,
@@ -85,7 +87,9 @@ export const updateCourses = CatchAsyncErrors(async (req, res, next) => {
 
 export const deleteCourse = CatchAsyncErrors(async (req, res, next) => {
   try {
-    await courseModal.findByIdAndDelete(req.params.id);
+    await courseModel.findByIdAndDelete(req.params.id);
+
+    await sectionModel.deleteMany({ course: req.params.id });
 
     res.status(200).json({
       success: true,

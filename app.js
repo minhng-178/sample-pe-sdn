@@ -14,7 +14,7 @@ import connectDB from "./utils/db.js";
 import { ErrorMiddleWare } from "./middleware/error.js";
 import passport from "./middleware/passport.js";
 import authRouter from "./routes/auth.route.js";
-import memberModal from "./models/member.model.js";
+import memberModel from "./models/member.model.js";
 import courseRouter from "./routes/course.route.js";
 import pageRoute from "./routes/section-page.route.js";
 
@@ -61,7 +61,7 @@ app.use(async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      const member = await memberModal.findById(decoded.id);
+      const member = await memberModel.findById(decoded.id);
       console.log(member, "member");
       res.locals.member = member;
       res.locals.isLoggedIn = true;

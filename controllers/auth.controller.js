@@ -1,5 +1,5 @@
 import { CatchAsyncErrors } from "../middleware/catch-async-error.js";
-import memberModal from "../models/member.model.js";
+import memberModel from "../models/member.model.js";
 import generateToken from "../utils/create-token.js";
 import ErrorHandler from "../utils/error-handler.js";
 import passport from "passport";
@@ -8,13 +8,13 @@ export const register = CatchAsyncErrors(async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const existedUser = await memberModal.findOne({ username });
+    const existedUser = await memberModel.findOne({ username });
 
     if (existedUser) {
       return next(new ErrorHandler("UserName đã tồn tại", 400));
     }
 
-    const newUser = await memberModal.create({ username, password });
+    const newUser = await memberModel.create({ username, password });
 
     res.status(201).json({
       _id: newUser._id,
@@ -30,14 +30,14 @@ export const registerLayout = CatchAsyncErrors(async (req, res, next) => {
   try {
     const { username, password } = req.body;
     // this.password = await bcrypt.hash(this.password, 10);
-    const existedUser = await memberModal.findOne({ username });
+    const existedUser = await memberModel.findOne({ username });
 
     if (existedUser) {
       req.flash("error", "Email exsited");
       return res.redirect("/login");
     }
 
-    const newUser = await memberModal.create({ username, password });
+    const newUser = await memberModel.create({ username, password });
 
     // Redirect to login after successful registration
     req.flash("success", "Register successfull! Please Login!");
@@ -100,7 +100,7 @@ export const logout = CatchAsyncErrors(async (req, res, next) => {
 /* getAll - GET */
 export const getAll = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const users = await memberModal.find();
+    const users = await memberModel.find();
 
     res.status(200).json({
       success: true,

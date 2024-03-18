@@ -21,6 +21,6 @@ memberSchema.pre("save", async function (next) {
   next();
 });
 
-const memberModal = mongoose.model("Members", memberSchema);
+const memberModel = mongoose.model("Members", memberSchema);
 
-export default memberModal;
+export default memberModel;

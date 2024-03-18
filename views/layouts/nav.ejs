@@ -1,46 +1,42 @@
-<div class="container">
-  <nav
-    class="navbar navbar-expand-lg bg-body-tertiary rounded"
-    aria-label="Thirteenth navbar example"
-  >
-    <div class="container-fluid">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarsExample11"
-        aria-controls="navbarsExample11"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary rounded"
+  aria-label="Thirteenth navbar example"
+>
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarsExample11"
+      aria-controls="navbarsExample11"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse d-md-flex" id="navbarsExample11">
-        <a class="navbar-brand col-md-3 me-0" href="/">Udemy</a>
-        <ul class="navbar-nav col-md-6 justify-content-md-center">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
+    <div class="collapse navbar-collapse d-md-flex" id="navbarsExample11">
+      <a class="navbar-brand col-md-3 me-0" href="/">Udemy</a>
+      <ul class="navbar-nav col-md-6 justify-content-md-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link active" aria-current="page" href="/about"
-              >About</a
-            >
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link active" aria-current="page" href="/pricings"
-              >Pricings</a
-            >
-          </li>
-        </ul>
-        <div class="d-lg-flex col-md-3 justify-content-md-end">
-          <% if (locals.isLoggedIn) { %> <%- include('./userMenu')-%> <% } else
-          { %>
-          <a class="btn btn-bd-primary" href="/login">Login</a>
-          <% }%>
-        </div>
+        <li class="nav-item dropdown">
+          <a class="nav-link active" aria-current="page" href="/about">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active" aria-current="page" href="/pricings"
+            >Pricings</a
+          >
+        </li>
+      </ul>
+      <div class="d-lg-flex col-md-3 justify-content-md-end">
+        <% if (locals.isLoggedIn) { %> <%- include('./userMenu')-%> <% } else {
+        %>
+        <a class="btn btn-bd-primary" href="/login">Login</a>
+        <% }%>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>

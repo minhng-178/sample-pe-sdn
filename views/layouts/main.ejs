@@ -132,8 +132,10 @@
     </style>
   </head>
   <body>
-    <%- include('./nav')-%>
-    <div class="container"><%- include('../toast')-%> <%- body %></div>
+    <div class="container">
+      <%- include('./nav')-%> <%- include('../toast')-%> <%- body %> <%-
+      include('./footer')-%>
+    </div>
     <script>
       document.addEventListener("DOMContentLoaded", (event) => {
         var toastElList = [].slice.call(document.querySelectorAll(".toast"));
@@ -150,6 +152,5 @@
         hiddenInput.value = this.checked ? "true" : "false";
       });
     </script>
-    <%- include('./footer')-%>
   </body>
 </html>
