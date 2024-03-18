@@ -1,0 +1,61 @@
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <% if(success_msg != ''){ %>
+  <div
+    class="toast bg-success text-white"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="me-auto"><i class="fa-solid fa-check"></i> Success</strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body"><%= success_msg %></div>
+  </div>
+  <% } %> <% if(error_msg != ''){ %>
+  <div
+    class="toast bg-danger text-white"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="me-auto"
+        ><i class="fa-solid fa-circle-exclamation"></i> Error</strong
+      >
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body"><%= error_msg %></div>
+  </div>
+  <% } %> <% if(error != ''){ %>
+  <div
+    class="toast bg-danger text-white"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="me-auto"
+        ><i class="fa-solid fa-circle-exclamation"></i> Error</strong
+      >
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body"><%= error %></div>
+  </div>
+  <% } %>
+</div>

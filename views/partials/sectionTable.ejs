@@ -1,0 +1,74 @@
+<table class="table">
+  <div class="text-end">
+    <a href="/sections/add" class="btn btn-bd-primary">Add New Section</a>
+  </div>
+  <thead>
+    <tr>
+      <th>Section Name</th>
+      <th>Duration</th>
+      <th>Main Task</th>
+      <th>Course</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (!sections || sections.length === 0) { %>
+    <tr>
+      <td colspan="6" class="text-center">No sections found.</td>
+    </tr>
+    <% } else { %> <% sections.forEach(section => { %>
+    <tr>
+      <td><%= section.sectionName %></td>
+      <td><%= section.duration %></td>
+      <td><%= section.isMainTask ? 'Yes' : 'No' %></td>
+      <td><%= section.course.courseName %></td>
+      <td>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li class="dropdown-item">
+              <a
+                href="/sections/detail/<%= section._id %>"
+                class="btn btn-primary btn-sm"
+              >
+                <i class="fa-solid fa-eye"></i>
+                View</a
+              >
+            </li>
+
+            <li class="dropdown-item">
+              <a
+                href="/sections/<%= section._id %>"
+                class="btn btn-warning btn-sm"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+                Edit</a
+              >
+            </li>
+
+            <li class="dropdown-item">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal<%= section._id %>"
+              >
+                <i class="fa-solid fa-trash"></i> Delete
+              </button>
+            </li>
+          </ul>
+          <%- include('../modals/deleteModal') -%>
+        </div>
+      </td>
+    </tr>
+    <% }) %> <% } %>
+  </tbody>
+</table>

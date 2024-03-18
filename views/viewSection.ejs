@@ -1,0 +1,48 @@
+<h2 class="text-center">View Section Detail</h2>
+
+<form action="/sections/<%= section._id %>?_method=PUT" method="POST">
+    <div class="form-group">
+        <label for="sectionName">Section Name</label>
+        <input type="text" class="form-control" id="sectionName" name="sectionName" value="<%= section.sectionName %>"
+            required readonly>
+        <small class="form-text text-muted">Section name should start with a capital letter and can contain letters,
+            digits, spaces, and forward slashes.</small>
+    </div>
+    <div class="form-group">
+        <label for="sectionDescription">Section Description</label>
+        <textarea class="form-control" id="sectionDescription" name="sectionDescription" required
+            readonly><%= section.sectionDescription %></textarea>
+    </div>
+    <div class="form-group">
+        <label for="duration">Duration</label>
+        <input type="number" class="form-control" id="duration" name="duration" value="<%= section.duration %>" required
+            readonly>
+    </div>
+    <div>
+        <h6>is MainTask</h6>
+        <div class="form-group form-check">
+            <input type="radio" class="form-check-input" id="isMainTaskTrue" name="isMainTask" value="true" disabled
+                <%=section.isMainTask ? 'checked' : '' %>>
+            <label class="form-check-label" for="isMainTaskTrue">True</label>
+        </div>
+        <div class="form-group form-check">
+            <input type="radio" class="form-check-input" id="isMainTaskFalse" name="isMainTask" value="false" disabled
+                <%=!section.isMainTask ? 'checked' : '' %>>
+            <label class="form-check-label" for="isMainTaskFalse">False</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="course">Course</label>
+        <select class="form-control" id="course" name="courseId" required disabled>
+            <% courses.forEach(course=> { %>
+                <option value="<%= course._id %>" <%=course._id.toString()===section.course._id.toString() ? 'selected'
+                    : '' %>><%= course.courseName %>
+                </option>
+                <% }) %>
+        </select>
+    </div>
+    <div class="mt-2">
+        <a type="submit" href="/dashboard" class="btn btn-primary">Back</a>
+    </div>
+</form>

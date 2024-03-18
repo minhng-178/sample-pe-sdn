@@ -1,0 +1,7 @@
+## Rename it to env file
+
+MONGO_URI=
+NODE_ENV=
+
+JWT_SECRET=
+SESSION_KEY=

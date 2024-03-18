@@ -1,0 +1,38 @@
+<div class="dropdown">
+  <button
+    class="btn btn-light dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton1"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
+      class="object-fit-cover rounded-circle"
+      width="36"
+      height="36"
+    />
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li>
+      <span class="dropdown-item-text"><%= locals.member.username %></span>
+    </li>
+    <!-- <li>
+      <a class="dropdown-item"><i class="fa-solid fa-user"></i> Profile</a>
+    </li> -->
+
+    <li>
+      <a class="dropdown-item" href="/dashboard"
+        ><i class="fa-solid fa-table"></i> Dashboard</a
+      >
+    </li>
+    <li><hr class="dropdown-divider" /></li>
+    <li>
+      <form action="api/v1/auth/logout" method="get">
+        <button type="submit" id="logoutButton" class="dropdown-item">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </form>
+    </li>
+  </ul>
+</div>
