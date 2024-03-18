@@ -1,7 +1,7 @@
-## Rename it to env file
+Rename it to env file, should let the NODE_ENV='development'
 
-MONGO_URI=
-NODE_ENV=
+MONGO_URI = your-mongo-uri
+NODE_ENV='development'
 
-JWT_SECRET=
-SESSION_KEY=
+JWT_SECRET= your-jwt-secret
+SESSION_KEY= your-session-secret
