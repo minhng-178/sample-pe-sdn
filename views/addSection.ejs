@@ -1,8 +1,8 @@
-<h2>Add New Section</h2>
+<h2>Add New Watch</h2>
 
 <form action="/sections" method="POST">
   <div class="form-group">
-    <label for="sectionName">Section Name</label>
+    <label for="sectionName">Watch Name</label>
     <input
       type="text"
       class="form-control"
@@ -16,7 +16,7 @@
     </small>
   </div>
   <div class="form-group">
-    <label for="sectionDescription">Section Description</label>
+    <label for="sectionDescription">Watch Description</label>
     <textarea
       class="form-control"
       id="sectionDescription"
@@ -36,7 +36,7 @@
   </div>
   <div class="form-group form-check">
     <div class="form-group">
-      <label>Main Task</label><br />
+      <label>Automatic</label><br />
       <input
         type="radio"
         id="isMainTaskTrue"
@@ -55,10 +55,10 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="course">Course</label>
+    <label for="course">Brand</label>
     <select class="form-control" id="course" name="courseId" required>
-      <% courses.forEach(course => { %>
-      <option value="<%= course._id %>"><%= course.courseName %></option>
+      <% brands.forEach(brands => { %>
+      <option value="<%= course._id %>"><%= brands.brandName %></option>
       <% }) %>
     </select>
   </div>

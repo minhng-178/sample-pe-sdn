@@ -92,7 +92,13 @@ export const createSection = CatchAsyncErrors(async (req, res, next) => {
       res.render("addSection", { courses: courses });
     }
 
+    //?  ^: Bắt đầu từ đầu chuỗi.
+    //? ([A-Z]): Bắt đầu bằng một chữ cái hoa từ A đến Z.
+    //? \w+: Bất kỳ số lượng ký tự chữ (lặp lại 1 hoặc nhiều lần) bao gồm chữ cái thường, chữ số và dấu gạch dưới.
+    //? $: Kết thúc chuỗi.
+
     const sectionNameRegex = /^[A-Z][A-Za-z0-9\s\/]*$/;
+
     if (!sectionNameRegex.test(sectionName)) {
       req.flash(
         "error",

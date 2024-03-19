@@ -15,8 +15,8 @@ import { ErrorMiddleWare } from "./middleware/error.js";
 import passport from "./middleware/passport.js";
 import authRouter from "./routes/auth.route.js";
 import memberModel from "./models/member.model.js";
-import courseRouter from "./routes/course.route.js";
-import pageRoute from "./routes/section-page.route.js";
+import brandRouter from "./routes/brand.route.js";
+import pagesRoute from "./routes/watch-page.route.js";
 
 dotenv.config();
 
@@ -62,7 +62,6 @@ app.use(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       const member = await memberModel.findById(decoded.id);
-      console.log(member, "member");
       res.locals.member = member;
       res.locals.isLoggedIn = true;
     } catch (err) {
@@ -91,8 +90,9 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1", courseRouter);
-app.use("/", pageRoute);
+app.use("/api/v1", brandRouter);
+
+app.use("/", pagesRoute);
 
 app.get("/test-api", (req, res, next) => {
   res.status(200).json({

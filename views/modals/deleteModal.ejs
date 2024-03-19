@@ -1,7 +1,7 @@
-<% sections.forEach(section => { %>
+<% watches.forEach(watch => { %>
 <div
   class="modal fade"
-  id="deleteModal<%= section._id %>"
+  id="deleteModal<%= watch._id %>"
   tabindex="-1"
   aria-labelledby="deleteModalLabel"
   aria-hidden="true"
@@ -9,7 +9,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Delete Section</h5>
+        <h5 class="modal-title" id="deleteModalLabel">Delete Watch</h5>
         <button
           type="button"
           class="btn-close"
@@ -24,10 +24,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cancel
         </button>
-        <form
-          action="/sections/<%= section._id %>?_method=DELETE"
-          method="POST"
-        >
+        <form action="/watches/<%= watch._id %>?_method=DELETE" method="POST">
           <input type="hidden" name="_method" value="DELETE" />
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
