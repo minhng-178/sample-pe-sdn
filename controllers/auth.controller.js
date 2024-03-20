@@ -1,4 +1,5 @@
 import { CatchAsyncErrors } from "../middleware/catch-async-error.js";
+import accountModel from "../models/account.model.js";
 import memberModel from "../models/member.model.js";
 import generateToken from "../utils/create-token.js";
 import ErrorHandler from "../utils/error-handler.js";
@@ -28,16 +29,19 @@ export const register = CatchAsyncErrors(async (req, res, next) => {
 // TO DO LATER
 export const registerLayout = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { us, pw } = req.body;
     // this.password = await bcrypt.hash(this.password, 10);
-    const existedUser = await memberModel.findOne({ username });
+
+    console.log(us, pw);
+
+    const existedUser = await memberModel.findOne({ us });
 
     if (existedUser) {
       req.flash("error", "Email exsited");
       return res.redirect("/login");
     }
 
-    const newUser = await memberModel.create({ username, password });
+    const newUser = await memberModel.create({ us, pw });
 
     // Redirect to login after successful registration
     req.flash("success", "Register successfull! Please Login!");
@@ -82,6 +86,7 @@ export const login = CatchAsyncErrors(async (req, res, next) => {
       }
     )(req, res, next);
   } catch (error) {
+    console.log(error);
     req.flash("error", error.message);
     return res.redirect("/login");
   }
@@ -100,7 +105,7 @@ export const logout = CatchAsyncErrors(async (req, res, next) => {
 /* getAll - GET */
 export const getAll = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const users = await memberModel.find();
+    const users = await accountModel.find();
 
     res.status(200).json({
       success: true,

@@ -1,69 +1,74 @@
-<h2>Add New Section</h2>
+<h2>Add New Watch</h2>
 
-<form action="/sections" method="POST">
+<form action="/watches" method="POST">
   <div class="form-group">
-    <label for="sectionName">Section Name</label>
+    <label for="watchName">Watch Name</label>
     <input
       type="text"
       class="form-control"
       id="sectionName"
-      name="sectionName"
+      name="watchName"
       required
     />
     <small class="form-text text-muted">
-      Section name should start with a capital letter and can contain letters,
+      Watch name should start with a capital letter and can contain letters,
       digits, spaces, and forward slashes.
     </small>
   </div>
   <div class="form-group">
-    <label for="sectionDescription">Section Description</label>
+    <label for="watchDescription">Watch Description</label>
     <textarea
       class="form-control"
-      id="sectionDescription"
-      name="sectionDescription"
+      id="watchDescription"
+      name="watchDescription"
       required
     ></textarea>
   </div>
   <div class="form-group">
-    <label for="duration">Duration</label>
+    <label for="duration">Image</label>
+    <input
+      type="text"
+      class="form-control"
+      id="duration"
+      name="image"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="duration">Price</label>
     <input
       type="number"
       class="form-control"
       id="duration"
-      name="duration"
+      name="price"
       required
     />
   </div>
   <div class="form-group form-check">
     <div class="form-group">
-      <label>Main Task</label><br />
+      <label>Automatic</label><br />
       <input
         type="radio"
         id="isMainTaskTrue"
-        name="isMainTask"
+        name="automatic"
         value="true"
         required
       />
       <label for="isMainTaskTrue">True</label><br />
-      <input
-        type="radio"
-        id="isMainTaskFalse"
-        name="isMainTask"
-        value="false"
-      />
+      <input type="radio" id="isMainTaskFalse" name="automatic" value="false" />
       <label for="isMainTaskFalse">False</label><br />
     </div>
   </div>
   <div class="form-group">
-    <label for="course">Course</label>
-    <select class="form-control" id="course" name="courseId" required>
-      <% courses.forEach(course => { %>
-      <option value="<%= course._id %>"><%= course.courseName %></option>
+    <label for="brand">Brand</label>
+    <select class="form-control" id="brand" name="brandId" required>
+      <% brands.forEach(brand => { %>
+      <option value="<%= brand._id %>"><%= brand.brandName %></option>
       <% }) %>
     </select>
   </div>
   <div class="mt-2">
     <a href="/dashboard" class="btn btn-secondary">Back</a>
-    <button type="submit" class="btn btn-bd-primary">Add Section</button>
+    <button type="submit" class="btn btn-bd-primary">Add watch</button>
   </div>
 </form>

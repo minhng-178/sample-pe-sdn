@@ -5,7 +5,7 @@ import { Strategy as JwtStrategy } from "passport-jwt";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { jwtOptions, sanitizeUser } from "./auth.js";
-import memberModal from "../models/member.model.js";
+import accountModal from "../models/account.model.js";
 dotenv.config();
 
 passport.use(
@@ -16,15 +16,13 @@ passport.use(
     done
   ) {
     try {
-      const user = await memberModal
-        .findOne({ username: username })
-        .select("+password");
+      const user = await accountModal.findOne({ us: username }).select("+pw");
 
       if (!user) {
         return done(null, false, { message: "Invalid username or password" });
       }
 
-      const isPasswordValid = await bcrypt.compare(password, user.password);
+      const isPasswordValid = await bcrypt.compare(password, user.pw);
 
       if (!isPasswordValid) {
         return done(null, false, { message: "Invalid username or password" });
@@ -49,7 +47,7 @@ passport.use(
   "jwt",
   new JwtStrategy(jwtOptions, async function (jwt_payload, done) {
     try {
-      const user = await memberModal.findById(jwt_payload.id);
+      const user = await accountModal.findById(jwt_payload.id);
 
       if (!user) {
         return done(null, false);
