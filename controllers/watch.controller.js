@@ -74,7 +74,8 @@ export const getWatchAddForm = async (req, res, next) => {
 
 export const createwatch = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const { watchName, watchDescription, price, automatic, brandId } = req.body;
+    const { watchName, watchDescription, image, price, automatic, brandId } =
+      req.body;
 
     const brands = await brandModel.find({});
     if (!brands) {
