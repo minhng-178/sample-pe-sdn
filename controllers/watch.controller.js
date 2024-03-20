@@ -65,8 +65,6 @@ export const getWatchAddForm = async (req, res, next) => {
       req.flash("error", "No course found.");
     }
 
-    console.log(brands);
-
     res.render("addSection", { brands: brands });
   } catch (error) {
     req.flash("error", error.message);
@@ -76,10 +74,7 @@ export const getWatchAddForm = async (req, res, next) => {
 
 export const createwatch = CatchAsyncErrors(async (req, res, next) => {
   try {
-    const { watchName, watchDescription, price, image, automatic, brandId } =
-      req.body;
-
-    console.log(req.body);
+    const { watchName, watchDescription, price, automatic, brandId } = req.body;
 
     const brands = await brandModel.find({});
     if (!brands) {
@@ -89,8 +84,13 @@ export const createwatch = CatchAsyncErrors(async (req, res, next) => {
     const brand = await brandModel.findById(brandId);
     if (!brand) {
       req.flash("error", "No course found.");
-      res.render("addSection", { brands: brands });
+      res.render("addWatch", { brands: brands });
     }
+
+    //?  ^: Bắt đầu từ đầu chuỗi.
+    //? ([A-Z]): Bắt đầu bằng một chữ cái hoa từ A đến Z.
+    //? \w+: Bất kỳ số lượng ký tự chữ (lặp lại 1 hoặc nhiều lần) bao gồm chữ cái thường, chữ số và dấu gạch dưới.
+    //? $: Kết thúc chuỗi.
 
     const watchNameRegex = /^[A-Z][A-Za-z0-9\s\/]*$/;
 
