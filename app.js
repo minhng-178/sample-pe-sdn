@@ -14,9 +14,9 @@ import connectDB from "./utils/db.js";
 import { ErrorMiddleWare } from "./middleware/error.js";
 import passport from "./middleware/passport.js";
 import authRouter from "./routes/auth.route.js";
-import memberModel from "./models/member.model.js";
 import brandRouter from "./routes/brand.route.js";
 import pagesRoute from "./routes/watch-page.route.js";
+import accountModel from "./models/account.model.js";
 
 dotenv.config();
 
@@ -61,7 +61,7 @@ app.use(async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      const member = await memberModel.findById(decoded.id);
+      const member = await accountModel.findById(decoded.id);
       res.locals.member = member;
       res.locals.isLoggedIn = true;
     } catch (err) {
